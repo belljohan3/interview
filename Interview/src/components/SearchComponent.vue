@@ -21,15 +21,18 @@
       </svg>
     </div>
     <div v-if="filteredData.length > 0" class="mt-5">
-      <div class="grid grid-cols-2 gap-4 mt-10">
-        <div v-for="item in filteredData" :key="item" class="p-4 border bg-white rounded-xl">
+      <div class="grid grid-cols-2 gap-4 mt-4 overflow-y-0">
+        <div
+          v-for="item in filteredData"
+          :key="item.id"
+          class="p-4 border bg-white h-[193px] rounded-xl"
+        >
           <h2 class="text-xs text-gray-500 font-semibold">{{ item.customer }}</h2>
-          <p class="font-bold text-lg">{{ item.project }}</p>
+          <p class="font-bold text-lg mb-12">{{ item.project }}</p>
           <span class="text-sm text-gray-400">{{ item.date }}</span>
         </div>
       </div>
     </div>
-    <!-- <div v-else class="text-center">There is no Projects</div> -->
   </div>
 </template>
 

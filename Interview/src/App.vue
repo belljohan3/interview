@@ -2,17 +2,18 @@
 import ProjectComponent from './components/ProjectComponent.vue'
 import SearchComponent from './components/SearchComponent.vue'
 import AddCustomer from './components/AddCustomer.vue'
+import CustomersList from './components/CustomersList.vue'
 </script>
 
 <template>
   <div
-    class="container relative mx-auto w-[375px] h-[812px] bg-[#EDF0F3] rounded-xl shadow p-3 m-10"
+    class="container relative mx-auto w-[375px] h-[812px] bg-[#EDF0F3] rounded-xl shadow-xl p-3 m-10"
   >
-    <AddCustomer class="absolute inset-x-0 bottom-16" />
+    <AddCustomer class="absolute inset-x-0 bottom-16 ml-2" />
     <div class="content pb-[56px]">
       <!-- content of each Menu which is active -->
       <div v-if="activeTab === 'projects'">
-        <h1 class="text-2xl leading-[40px] font-bold mt-8 mb-8">Projects</h1>
+        <h1 class="text-[32px] leading-[40px] font-bold mt-8 mb-8">Projects</h1>
         <SearchComponent />
         <ProjectComponent />
       </div>
@@ -24,9 +25,13 @@ import AddCustomer from './components/AddCustomer.vue'
       <nav
         class="absolute inset-x-0 bottom-0 bg-white flex text-gray-400 justify-around items-center p-2"
       >
-        <a :class="{ 'text-blue-500': activeTab === 'projects' }" @click="activeTab = 'projects'">
+        <a
+          :class="{ 'text-blue-500': activeTab === 'projects' }"
+          @click="activeTab = 'projects'"
+          class="text-[10px]"
+        >
           <svg
-            class="h-[20.54px] w-[20.54px] mb-1 mx-auto"
+            class="h-[20.54px] w-[20.54px] mx-auto"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
@@ -39,9 +44,13 @@ import AddCustomer from './components/AddCustomer.vue'
           </svg>
           Projects
         </a>
-        <a :class="{ 'text-blue-500': activeTab === 'customers' }" @click="activeTab = 'customers'">
+        <a
+          :class="{ 'text-blue-500': activeTab === 'customers' }"
+          @click="activeTab = 'customers'"
+          class="text-[10px]"
+        >
           <svg
-            class="h-[20.54px] w-[20.54px] mb-1 mx-auto"
+            class="h-[20.54px] w-[20.54px] mx-auto"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
@@ -55,9 +64,13 @@ import AddCustomer from './components/AddCustomer.vue'
           </svg>
           Customers
         </a>
-        <a :class="{ 'text-blue-500': activeTab === 'company' }" @click="activeTab = 'company'">
+        <a
+          :class="{ 'text-blue-500': activeTab === 'company' }"
+          class="text-[10px]"
+          @click="activeTab = 'company'"
+        >
           <svg
-            class="h-[20.54px] w-[20.54px] mb-1 mx-auto"
+            class="h-[20.54px] w-[20.54px] mx-auto"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
@@ -77,10 +90,12 @@ import AddCustomer from './components/AddCustomer.vue'
 </template>
 
 <script lang="ts">
+import ProjectIcon from './assets/Icons/ProjectIcon.svg'
 export default {
   data() {
     return {
-      activeTab: 'projects' // Default active Tab
+      activeTab: 'projects', // Default active Tab
+      components: { ProjectIcon }
     }
   }
 }

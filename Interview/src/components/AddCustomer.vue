@@ -48,7 +48,7 @@
           </div>
           <!-- Modal body -->
           <div class="p-6 space-y-6">
-            <form @submit="submitForm">
+            <form @submit.prevent="saveData">
               <div class="mb-6">
                 <label
                   for="customer"
@@ -93,18 +93,14 @@
                   required
                 />
               </div>
+              <button
+                id="closeButton"
+                type="submit"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Submit
+              </button>
             </form>
-          </div>
-          <!-- Modal footer -->
-          <div
-            class="flex items-center py-2 px-5 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600"
-          >
-            <button
-              type="submit"
-              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Submit
-            </button>
           </div>
         </div>
       </div>
@@ -116,6 +112,7 @@
 import { onMounted } from 'vue'
 import { initFlowbite } from 'flowbite'
 import axios from 'axios'
+import projects from '../assets/projects.json'
 
 // initialize components based on data attribute selectors
 onMounted(() => {
@@ -125,41 +122,31 @@ onMounted(() => {
 export default {
   data() {
     return {
+      id: 0,
       customer: '',
       project: '',
-      date: ''
+      date: '',
+      datas: projects
     }
   },
   methods: {
-    submitForm(event: { preventDefault: () => void }) {
-      event.preventDefault()
-
-      // Create an object with form datas
-      const formData = {
+    saveData() {
+      const dataToSave = {
+        id: this.id++,
         customer: this.customer,
         project: this.project,
         date: this.date
       }
 
-      // Add the form data to the local JSON file
-      this.addToJSON(formData)
+      this.datas.unshift(dataToSave)
 
-      // Effectuer une validation ou un traitement supplémentaire des données ici
-
-      // Clear the form inputs after submission
-      this.customer = ''
-      this.project = ''
-      this.date = ''
-    },
-    // Make an Axios POST request to add the data to the JSON file
-    addToJSON(formData: { customer: string; project: string; date: string }) {
       axios
-        .post('https:/localhost:3000/src/assets/projects.json', formData)
+        .post('http://localhost:3000/api/save-data', dataToSave)
         .then((response) => {
-          console.log(response.data)
+          console.log('Data and saved successfully', response)
         })
         .catch((error) => {
-          console.error(error)
+          console.error('Error saving data:', error)
         })
     }
   }
