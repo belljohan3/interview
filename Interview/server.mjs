@@ -23,7 +23,7 @@ app.post('/api/save-data', (req, res) => {
     }
 
     // Append the new data to the existing data
-    existingData.unshift(newData)
+    existingData.push(newData)
 
     // Write the updated data back to the JSON file
     writeFile('src/assets/projects.json', JSON.stringify(existingData), 'utf8', (err) => {

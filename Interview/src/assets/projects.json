@@ -1,9 +1,5 @@
 [
-  { "id": 0, "customer": "Johan Bell", "project": "Internship", "date": "2023-06-05T10:26" },
-  { "id": 0, "customer": "Johan Bell", "project": "Internship", "date": "2023-06-05T10:26" },
-  { "id": 0, "customer": "Johan Bell", "project": "Internship", "date": "2023-06-05T10:26" },
-  { "id": 0, "customer": "Johan Bell", "project": "Internship", "date": "2023-06-05T10:26" },
-  { "id": 0, "customer": "Johan Bell", "project": "Internship", "date": "2023-06-05T10:26" },
-  { "id": 0, "customer": "Johan Bell", "project": "Internship", "date": "2023-06-05T10:26" },
-  { "id": 1, "customer": "Christian Bell", "project": "Manager", "date": "2023-06-05T10:26" }
+  { "id": 0, "customer": "Test", "project": "HIP HOP", "date": "2023-06-07T18:09" },
+  { "id": 0, "customer": "Christian Bell", "project": "Translator", "date": "2023-06-07T18:07" },
+  { "id": 0, "customer": "Johan Bell", "project": "Test App", "date": "2023-06-07T18:07" }
 ]

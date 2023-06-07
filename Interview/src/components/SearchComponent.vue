@@ -20,7 +20,7 @@
         />
       </svg>
     </div>
-    <div v-if="filteredData.length > 0" class="mt-5">
+    <div v-if="filteredData.length > 0" class="mt-5 min-h-[193px] max-h-[600px] overflow-y-auto">
       <div class="grid grid-cols-2 gap-4 mt-4 overflow-y-0">
         <div
           v-for="item in filteredData"
@@ -28,7 +28,7 @@
           class="p-4 border bg-white h-[193px] rounded-xl"
         >
           <h2 class="text-xs text-gray-500 font-semibold">{{ item.customer }}</h2>
-          <p class="font-bold text-lg mb-12">{{ item.project }}</p>
+          <p class="font-bold text-lg mb-20">{{ item.project }}</p>
           <span class="text-sm text-gray-400">{{ item.date }}</span>
         </div>
       </div>

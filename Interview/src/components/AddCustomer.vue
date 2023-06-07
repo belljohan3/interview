@@ -98,7 +98,7 @@
                 type="submit"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
-                Submit
+                + Add
               </button>
             </form>
           </div>
@@ -130,6 +130,7 @@ export default {
     }
   },
   methods: {
+    // save datas from the form
     saveData() {
       const dataToSave = {
         id: this.id++,
@@ -138,8 +139,10 @@ export default {
         date: this.date
       }
 
-      this.datas.unshift(dataToSave)
+      // push datas form the Array
+      this.datas.push(dataToSave)
 
+      // request that write new datas in the JSON file
       axios
         .post('http://localhost:3000/api/save-data', dataToSave)
         .then((response) => {
@@ -148,6 +151,13 @@ export default {
         .catch((error) => {
           console.error('Error saving data:', error)
         })
+      // resseting forms
+      this.customer = ''
+      this.project = ''
+      this.date = ''
+
+      // reload the page
+      window.location.reload()
     }
   }
 }

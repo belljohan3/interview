@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-2 gap-4 mt-4">
+  <div class="grid grid-cols-2 gap-4 min-h-[193px] max-h-[582px] overflow-y-auto mt-4">
     <div v-for="item in myData" :key="item.id" class="p-4 border bg-white h-[193px] rounded-xl">
       <h2 class="text-xs text-gray-500 font-semibold">{{ item.customer }}</h2>
       <p class="font-bold text-lg mb-20">{{ item.project }}</p>
