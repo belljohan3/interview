@@ -4,14 +4,14 @@
       type="text"
       class="w-[110px] pl-9 border border-gray-300 font-semibold leading[20px] placeholder-blue-700 rounded-full bg-transparent focus:outline-none focus:ring-2 focus:ring-gray-500"
       placeholder="Search"
-      v-model="searchTerm"
+      v-model="searchQuery"
     />
-    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+    <div class="absolute inset-y-0 left-0 pl-3 flex items-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         fill="currentColor"
-        class="w-[15.45px] h-[15.45px] text-[#0055FF]"
+        class="w-6 h-6 text-[#0055FF]"
       >
         <path
           fill-rule="evenodd"
@@ -20,42 +20,49 @@
         />
       </svg>
     </div>
-    <div v-if="filteredData.length > 0" class="mt-5 min-h-[193px] max-h-[600px] overflow-y-auto">
-      <div class="grid grid-cols-2 gap-4 mt-4 overflow-y-0">
-        <div
-          v-for="item in filteredData"
-          :key="item.id"
-          class="p-4 border bg-white h-[193px] rounded-xl"
-        >
+    <div v-if="searchResults.length > 0" class="relative top-full mt-5">
+      <h1 class="text-2xl leading-[40px] font-bold mb-5">Results</h1>
+
+      <div class="grid grid-cols-2 gap-4 overflow-y-auto mt-4">
+        <div v-for="item in searchResults" :key="item" class="p-4 border bg-white rounded-xl">
           <h2 class="text-xs text-gray-500 font-semibold">{{ item.customer }}</h2>
-          <p class="font-bold text-lg mb-20">{{ item.project }}</p>
-          <span class="text-sm text-gray-400">{{ item.date }}</span>
+          <p class="font-bold text-lg mb-[5.5rem]">{{ item.project }}</p>
+          <span class="text-sm text-gray-400">{{ date(item.lastDate).fromNow() }}</span>
         </div>
       </div>
+      <div class="border border-black mt-5 mx-auto w-[15rem]"></div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import data from '@/assets/projects.json'
+import jsonData from '@/assets/projects.json' // Chemin vers votre fichier JSON
+import relativeTime from 'dayjs/plugin/relativeTime'
+import dayjs from 'dayjs'
 
 export default {
-  name: 'SearchBar',
   data() {
     return {
-      searchTerm: '',
-      filteredData: []
+      searchQuery: '',
+      jsonData: [],
+      date: dayjs.extend(relativeTime)
     }
   },
-  watch: {
-    searchTerm() {
-      this.filterData()
-    }
+  mounted() {
+    // Charger les données depuis le fichier JSON
+    this.jsonData = jsonData
   },
-  methods: {
-    filterData() {
-      this.filteredData = data.filter((item) =>
-        item.customer.toLowerCase().includes(this.searchTerm.toLowerCase())
+  computed: {
+    searchResults() {
+      if (this.searchQuery === '') {
+        return []
+      }
+
+      const query = this.searchQuery.toLowerCase()
+
+      return this.jsonData.filter(
+        (item) =>
+          item.customer.toLowerCase().includes(query) || item.project.toLowerCase().includes(query)
       )
     }
   }

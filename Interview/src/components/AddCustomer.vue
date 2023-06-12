@@ -46,7 +46,7 @@
               </svg>
             </button>
           </div>
-          <!-- Modal body -->
+          <!-- Modal Form body -->
           <div class="p-6 space-y-6">
             <form @submit.prevent="saveData">
               <div class="mb-6">
@@ -60,7 +60,6 @@
                   type="text"
                   id="customer"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="name@flowbite.com"
                   required
                 />
               </div>
@@ -74,21 +73,6 @@
                   v-model="project"
                   type="text"
                   id="project"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="name@flowbite.com"
-                  required
-                />
-              </div>
-              <div class="mb-6">
-                <label
-                  for="date"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >Date</label
-                >
-                <input
-                  v-model="date"
-                  type="datetime-local"
-                  id="date"
                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required
                 />
@@ -111,7 +95,7 @@
 <script lang="ts">
 import { onMounted } from 'vue'
 import { initFlowbite } from 'flowbite'
-import axios from 'axios'
+import { addData } from '../services/data.service'
 import projects from '../assets/projects.json'
 
 // initialize components based on data attribute selectors
@@ -122,10 +106,9 @@ onMounted(() => {
 export default {
   data() {
     return {
-      id: 0,
       customer: '',
       project: '',
-      date: '',
+      lastDate: '',
       datas: projects
     }
   },
@@ -133,30 +116,22 @@ export default {
     // save datas from the form
     saveData() {
       const dataToSave = {
-        id: this.id++,
         customer: this.customer,
         project: this.project,
-        date: this.date
+        lastDate: this.lastDate
       }
 
       // push datas form the Array
       this.datas.push(dataToSave)
 
-      // request that write new datas in the JSON file
-      axios
-        .post('http://localhost:3000/api/save-data', dataToSave)
-        .then((response) => {
-          console.log('Data and saved successfully', response)
-        })
-        .catch((error) => {
-          console.error('Error saving data:', error)
-        })
-      // resseting forms
+      // write new datas in the JSON file
+      addData(dataToSave)
+
+      // resseting form
       this.customer = ''
       this.project = ''
-      this.date = ''
 
-      // reload the page
+      // reload
       window.location.reload()
     }
   }

@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import NavigationMenu from './components/NavigationMenu.vue'
+import HomeView from './view/HomeView.vue'
 </script>
 
 <template>
   <div>
-    <NavigationMenu />
+    <HomeView />
   </div>
 </template>

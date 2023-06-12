@@ -7,5 +7,13 @@
     {
       "path": "./tsconfig.app.json"
     }
-  ]
+  ],
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "preserveValueImports": false,
+    "verbatimModuleSyntax": false,
+    "types": []
+  }
 }

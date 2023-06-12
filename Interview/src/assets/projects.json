@@ -1,5 +1,5 @@
 [
-  { "id": 0, "customer": "Test", "project": "HIP HOP", "date": "2023-06-07T18:09" },
-  { "id": 0, "customer": "Christian Bell", "project": "Translator", "date": "2023-06-07T18:07" },
-  { "id": 0, "customer": "Johan Bell", "project": "Test App", "date": "2023-06-07T18:07" }
+  { "customer": "Johan Bell", "project": "Software", "lastDate": "2023-06-12T01:25:07+01:00" },
+  { "customer": "Christian", "project": "Translation", "lastDate": "2023-06-12T01:25:39+01:00" },
+  { "customer": "Johannes Floor", "project": "CEO ", "lastDate": "2023-06-12T11:02:09+01:00" }
 ]
